@@ -1,0 +1,14 @@
+.movieDetails {
+  max-width: 95%;
+  margin: auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header > img {
+  object-fit: contain;
+  max-width: 25%;
+}

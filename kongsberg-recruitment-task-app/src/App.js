@@ -1,16 +1,18 @@
-import { createBrowserRouter, Link, RouterProvider } from 'react-router-dom'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import RootLayout from './pages/RootLayout';
-import Books from './pages/Books';
+import Movies, { loader as moviesLoader } from './pages/Movies';
+import MovieDetails from './pages/MovieDetails';
+
+const API_KEY = `b12be5c91f9c23950c809e4d6f906c31`
 
 const router = createBrowserRouter([
   {
     path: '/', element: <RootLayout />, children: [
       {
-        path: 'books',
-        handle: { crumb: () => <Link to={ 'books' }>Books</Link> },
+        path: 'movies',
         children: [
-          { index: true, element: <Books /> },
-          { path: ':bookID', element: <h3>This is book details</h3> }
+          { index: true, element: <Movies />, loader: moviesLoader },
+          { path: ':movieID', element: <MovieDetails /> }
         ]
       }
     ]
