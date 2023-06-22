@@ -25,11 +25,10 @@ async function loadMovies() {
 	})
 
 	const data = await res.json()
-	console.log(data.results)
 	return data.results
 }
 
-export const loader = async () => {
+export async function loader() {
 	return defer({
 		movies: loadMovies()
 	})

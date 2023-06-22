@@ -1,11 +1,9 @@
-import movie from './../movie.json'
-
 import classes from './MovieDetails.module.css'
 
-export default function MovieDetails() {
+export default function MovieDetails({ movie }) {
 	const genres = movie.genres.map(genre => genre.name).join(', ')
 	const releaseDate = new Date(movie.release_date)
-	console.log(releaseDate)
+
 	return <div className={ classes.movieDetails }>
 		<div className={ classes.header }>
 			<div>
