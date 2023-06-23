@@ -1,7 +1,8 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
 
-import classes from './TableRow.module.css'
 import TableCell from "./TableCell";
+
+import classes from './TableRow.module.css'
 
 export default function TableRow({ item }) {
 	const location = useLocation()

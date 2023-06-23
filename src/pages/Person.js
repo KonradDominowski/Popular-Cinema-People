@@ -1,9 +1,9 @@
 import { Suspense } from "react";
 import { json, defer, Await, useLoaderData } from "react-router-dom";
 import PersonDetails from "../components/PersonDetails";
+import Spinner from "../components/Spinner";
 
 async function loadPerson(id) {
-	console.log('person fetched')
 	const options = {
 		method: 'GET',
 		headers: {
@@ -30,7 +30,7 @@ export async function loader({ params }) {
 
 export default function Person() {
 	const { person } = useLoaderData()
-	return <Suspense fallback={ <h2>Loading person data...</h2> }>
+	return <Suspense fallback={ <Spinner /> }>
 		<Await resolve={ person }>
 			{ fetchedPerson =>
 				<PersonDetails person={ fetchedPerson } /> }

@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import { Await, defer, json, useLoaderData } from 'react-router-dom';
 
 import PeopleList from '../components/PeopleList';
+import Spinner from './../components/Spinner'
 
 async function loadPeople() {
 	console.log('people fetched')
@@ -33,7 +34,7 @@ export async function loader() {
 export default function People() {
 	const { people } = useLoaderData()
 
-	return <Suspense fallback={ <h2>Loading people data...</h2> }>
+	return <Suspense fallback={ <Spinner /> }>
 		<Await resolve={ people }>
 			{ fetchedPeople => <PeopleList people={ fetchedPeople } /> }
 		</Await>
