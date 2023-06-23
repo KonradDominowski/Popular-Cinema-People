@@ -1,0 +1,35 @@
+.row {
+  display: grid;
+  margin: auto;
+  grid-template-columns: repeat(4, 1fr);
+  padding-bottom: 0.2rem;
+  padding-top: 0.2rem;
+}
+
+.row img {
+  display: inline-block;
+  max-height: 100px;
+  object-fit: contain;
+}
+
+.row > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 1.15em;
+}
+
+.title > span {
+  font-weight: normal;
+  font-size: 0.9rem;
+  color: rgba(48, 48, 48, 0.808);
+}
+
+.rating {
+  font-weight: bold;
+  font-size: 1.2rem;
+}

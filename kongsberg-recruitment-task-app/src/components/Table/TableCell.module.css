@@ -1,0 +1,15 @@
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cell > ul {
+  list-style: none;
+  padding: 0;
+}
+
+.name {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
