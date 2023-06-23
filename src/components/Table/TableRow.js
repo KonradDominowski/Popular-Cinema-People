@@ -1,4 +1,5 @@
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
+import { HashLink } from "react-router-hash-link";
 
 import TableCell from "./TableCell";
 
@@ -12,7 +13,7 @@ export default function TableRow({ item }) {
 
 	return (
 		<>
-			<Link to={ detailedPerson ? '.' : `${item.id}` } className={ classesCSS } >
+			<HashLink smooth id={ item.id } to={ detailedPerson ? '.' : `${item.id}#${item.id}` } className={ classesCSS } >
 				<TableCell className={ 'name' }>{ item.name }</TableCell>
 				<TableCell>
 					<ul>
@@ -22,7 +23,7 @@ export default function TableRow({ item }) {
 				<TableCell>
 					{ item.known_for_department }
 				</TableCell>
-			</Link >
+			</HashLink >
 			{ detailedPerson && <Outlet /> }
 		</>
 	)
