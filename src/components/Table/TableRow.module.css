@@ -1,0 +1,30 @@
+.tableRow {
+  all: unset;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-decoration: none;
+  border-image: linear-gradient(
+      98deg,
+      #eb1c1c00 10%,
+      rgba(100, 100, 100, 0.3) 30%,
+      rgb(100, 100, 100, 0.3) 70%,
+      #ff000000 90%
+    )
+    1;
+  border-width: 1px;
+  border-style: solid;
+  border-top: none;
+}
+
+.tableRow:hover {
+  background-color: rgba(105, 105, 105, 0.062);
+}
+
+.tableRow:active {
+  background-color: rgba(105, 105, 105, 0.13);
+}
+
+.active {
+  background-color: rgba(105, 105, 105, 0.13);
+}
