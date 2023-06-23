@@ -11,7 +11,7 @@ export default function RootLayout() {
 			<div className={ classes.crumbs }>
 				<Breadcrumbs />
 			</div>
-			<Link to={ 'people/' } className={ classes.link } >Show People</Link>
+			<Link to={ 'people' } className={ classes.link } >Show People</Link>
 		</div>
 		<Outlet />
 	</>

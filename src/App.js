@@ -8,34 +8,23 @@ import Person, { loader as personLoader } from './pages/Person';
 const router = createBrowserRouter([
   {
     path: '/', element: <RootLayout />, children: [
-      // {
-      //   path: 'movies',
-      //   children: [
-      //     { index: true, element: <Movies />, loader: moviesLoader },
-      //     { path: ':movieID', element: <Movie />, loader: detailsLoader },
-      //   ]
-      // },
       {
         path: 'people',
         element: <People />,
         loader: peopleLoader,
         children: [
-          { path: ':personID', id: 'personDetails', element: <Person />, loader: personLoader }
+          {
+            path: ':personID',
+            id: 'personDetails',
+            element: <Person />,
+            loader: personLoader
+          }
         ]
       },
-      // {
-      //   path: 'people',
-      //   children: [
-      //     { index: true, element: <People />, loader: peopleLoader },
-      //     { path: ':personID', element: <Person />, loader: personLoader }
-      //   ]
-      // },
-
     ]
   }
 ])
 function App() {
-
 
   return (
     <RouterProvider router={ router } />

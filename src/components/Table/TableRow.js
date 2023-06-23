@@ -11,7 +11,7 @@ export default function TableRow({ item }) {
 
 	return (
 		<>
-			<Link to={ `${item.id}` } className={ classesCSS } >
+			<Link to={ detailedPerson ? '.' : `${item.id}` } className={ classesCSS } >
 				<TableCell className={ 'name' }>{ item.name }</TableCell>
 				<TableCell>
 					<ul>
@@ -22,8 +22,7 @@ export default function TableRow({ item }) {
 					{ item.known_for_department }
 				</TableCell>
 			</Link >
-			{ detailedPerson && <Outlet />
-			}
+			{ detailedPerson && <Outlet /> }
 		</>
 	)
 }

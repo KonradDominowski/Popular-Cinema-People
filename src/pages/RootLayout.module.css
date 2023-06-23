@@ -12,18 +12,18 @@
 }
 
 .link {
+  transition: 0.15s;
   all: unset;
   margin: 1rem;
   display: inline-block;
   cursor: pointer;
   border: 1px solid black;
   padding: 1rem;
-  background: linear-gradient(315deg, #8ba6b3 26.8%, #bee9fc 64%);
+  background: linear-gradient(135deg, #c0e5f6 26.8%, #adfcea 64%) no-repeat;
   border-radius: 2rem;
 }
 
 .link:hover {
   transition: 0.15s;
-  font-size: 1.2rem;
   color: white;
 }

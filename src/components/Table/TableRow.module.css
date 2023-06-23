@@ -1,4 +1,5 @@
 .tableRow {
+  position: relative;
   all: unset;
   cursor: pointer;
   display: grid;
