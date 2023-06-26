@@ -1,11 +1,12 @@
 import { Suspense } from 'react';
-import { Await, defer, json, useLoaderData } from 'react-router-dom';
+import { Await, defer, json, useLoaderData, useParams } from 'react-router-dom';
 
-import PeopleList from '../components/PeopleList';
-import Spinner from './../components/Spinner'
+import PeopleList from '../components/PeopleTable/PeopleList';
+import Spinner from './../components/UI/Spinner'
+import { Link } from 'react-router-dom';
 
-async function loadPeople() {
-	console.log('people fetched')
+async function loadPeople(pageNumber) {
+	console.log('pageNumber:', pageNumber)
 	const options = {
 		method: 'GET',
 		headers: {
@@ -14,7 +15,7 @@ async function loadPeople() {
 		}
 	};
 
-	const res = await fetch('https://api.themoviedb.org/3/trending/person/day?language=en-US', options)
+	const res = await fetch(`https://api.themoviedb.org/3/person/popular?language=en-US&page=${pageNumber}`, options)
 
 	if (!res.ok) throw json({
 		message: 'Could not fetch people data'
@@ -24,19 +25,35 @@ async function loadPeople() {
 	return data.results
 }
 
-export async function loader() {
+export function loader({ params }) {
+	const pageNumber = params.pageNumber
+
 	return defer({
-		people: loadPeople()
+		people: loadPeople(pageNumber)
 	})
 }
 
 
 export default function People() {
 	const { people } = useLoaderData()
+	const params = useParams()
 
-	return <Suspense fallback={ <Spinner /> }>
-		<Await resolve={ people }>
-			{ fetchedPeople => <PeopleList people={ fetchedPeople } /> }
-		</Await>
-	</Suspense>
+	const currentPage = Number(params.pageNumber)
+	const previousPage = `/people/${currentPage - 1}`
+	const nextPage = `/people/${currentPage + 1}`
+
+	return (
+		<>
+			<div>
+				<Link to={ previousPage }>Previous</Link>
+				<span> Page { currentPage }</span>
+				<Link to={ nextPage }>Next</Link>
+			</div>
+			<Suspense fallback={ <Spinner /> }>
+				<Await resolve={ people }>
+					{ fetchedPeople => <PeopleList people={ fetchedPeople } /> }
+				</Await>
+			</Suspense>
+		</>
+	)
 }

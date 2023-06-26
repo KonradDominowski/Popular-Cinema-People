@@ -1,5 +1,5 @@
 import classes from './PeopleList.module.css'
-import TableRow from './Table/TableRow'
+import TableRow from './TableRow'
 
 export default function PeopleList({ people }) {
 	return <div className={ classes.table }>

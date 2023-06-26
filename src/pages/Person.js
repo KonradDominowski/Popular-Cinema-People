@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { json, defer, Await, useLoaderData } from "react-router-dom";
-import PersonDetails from "../components/PersonDetails";
-import Spinner from "../components/Spinner";
+import PersonDetails from "../components/PersonTable/PersonDetails";
+import Spinner from "../components/UI/Spinner";
 
 async function loadPerson(id) {
 	const options = {

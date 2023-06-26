@@ -14,6 +14,14 @@
   object-fit: contain;
 }
 
+.row img:before {
+  content: "";
+  display: block;
+  height: 100px;
+  width: 100px;
+  background: black;
+}
+
 .row > div {
   display: flex;
   flex-direction: column;
@@ -33,5 +41,11 @@
 
 .rating {
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
+}
+
+.rating > span {
+  font-weight: normal;
+  font-size: 0.7rem;
+  color: rgba(48, 48, 48, 0.808);
 }

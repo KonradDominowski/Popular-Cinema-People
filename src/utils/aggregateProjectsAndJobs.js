@@ -7,13 +7,14 @@ export default function aggregateProjectsAndJobs(projects) {
 	let aggregatedProjects = []
 
 	projects.forEach(project => {
+		const projectTitle = project.title || project.name
+
 		if (isAggregated(project)) {
-			jobs[project.title || project.name]?.push(project.job || project.character)
+			jobs[projectTitle].push(project.job || project.character)
 		} else {
-			jobs[project.title] = [project.job || project.character]
+			jobs[projectTitle] = [project.job || project.character]
 			aggregatedProjects.push(project)
 		}
 	})
-
 	return [aggregatedProjects, jobs]
 }
