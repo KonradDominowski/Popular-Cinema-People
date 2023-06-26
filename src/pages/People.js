@@ -6,7 +6,6 @@ import Spinner from './../components/UI/Spinner'
 import { Link } from 'react-router-dom';
 
 async function loadPeople(pageNumber) {
-	console.log('pageNumber:', pageNumber)
 	const options = {
 		method: 'GET',
 		headers: {
