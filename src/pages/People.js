@@ -4,7 +4,6 @@ import { Await, defer, json, useLoaderData, useParams } from 'react-router-dom';
 import PeopleList from '../components/PeopleTable/PeopleList';
 import Spinner from './../components/UI/Spinner'
 import { Link } from 'react-router-dom';
-import ErrorElement from './ErrorElement';
 
 async function loadPeople(pageNumber) {
 	if (pageNumber < 1 || pageNumber > 500) {
