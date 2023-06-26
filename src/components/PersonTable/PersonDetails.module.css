@@ -6,17 +6,8 @@
   box-shadow: inset 0 10px 20px -25px rgba(0, 0, 0, 0.5), inset 0 -10px 20px -25px rgba(0, 0, 0, 0.5);
 }
 
-.header {
-  display: grid;
-  grid-template-columns: 50% 1fr 1fr;
-  position: sticky;
-  top: 0;
-}
-
-.header > button {
-  z-index: 100;
-  border: solid 1px black;
-  padding: 1rem;
-  font-size: 1.2rem;
-  font-weight: bold;
+@media (width < 480) {
+  .details {
+    max-height: 20rem;
+  }
 }

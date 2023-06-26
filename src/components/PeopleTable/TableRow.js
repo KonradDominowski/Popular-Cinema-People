@@ -9,16 +9,21 @@ import personDetailsContext from "../../context/personDetailsContext";
 export default function TableRow({ item }) {
 	const { setCurrentName } = useContext(personDetailsContext)
 	const location = useLocation()
+
 	const currentPersonID = location.pathname.split('/').at(-1)
 	const detailedPerson = Number(currentPersonID) === item.id
-	const classesCSS = `${classes.tableRow} ${detailedPerson && classes.active}`
+
+	let classesCSS = classes.tableRow
 
 	if (detailedPerson) {
 		setCurrentName(item.name)
+		classesCSS += ` ${classes.active}`
 	}
+
 	return (
 		<>
-			<HashLink smooth
+			<HashLink
+				smooth
 				id={ item.id }
 				to={ detailedPerson ? '.' : `${item.id}#${item.id}` }
 				className={ classesCSS }
@@ -26,7 +31,7 @@ export default function TableRow({ item }) {
 				<TableCell className={ 'name' }>{ item.name }</TableCell>
 				<TableCell>
 					<ul>
-						{ item.known_for.map(el => <li key={ el.id }>{ el.title }</li>) }
+						{ item.known_for.map(el => <li key={ el.id }>{ el.title || el.name }</li>) }
 					</ul>
 				</TableCell>
 				<TableCell> { item.known_for_department } </TableCell>

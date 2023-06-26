@@ -1,17 +1,12 @@
 import { Suspense } from 'react';
-import { Await, defer, json, useLoaderData, useParams } from 'react-router-dom';
+import { Await, defer, json, useLoaderData, useParams, Link } from 'react-router-dom';
 
 import PeopleList from '../components/PeopleTable/PeopleList';
 import Spinner from './../components/UI/Spinner'
-import { Link } from 'react-router-dom';
+
+import classes from './People.module.css'
 
 async function loadPeople(pageNumber) {
-	if (pageNumber < 1 || pageNumber > 500) {
-		return json({
-			message: 'Page number has to be between 1 and 500'
-		}, { status: 422 })
-	}
-
 	const options = {
 		method: 'GET',
 		headers: {
@@ -23,12 +18,10 @@ async function loadPeople(pageNumber) {
 	const res = await fetch(`https://api.themoviedb.org/3/person/popular?language=en-US&page=${pageNumber}`, options)
 
 	if (!res.ok) {
-		console.log('json is returned')
 		return json({ message: 'Could not fetch data' }, { status: 422 })
 	}
 
 	const data = await res.json()
-
 	return data.results
 }
 
@@ -49,24 +42,35 @@ export default function People() {
 	const previousPage = `/people/${currentPage - 1}`
 	const nextPage = `/people/${currentPage + 1}`
 
+	const previousPageLink = (currentPage <= 1) ?
+		<div className={ `${classes.prev} ${classes.disabled}` }>Previous</div> :
+		<Link to={ previousPage } className={ classes.prev }>Previous</Link>
+
+	const nextPageLink = (currentPage >= 500) ?
+		<div className={ `${classes.next} ${classes.disabled}` }>Next</div> :
+		<Link to={ nextPage } className={ classes.next }>Next</Link>
 	return (
 		<>
-			<div>
-				{
-					currentPage > 1 && <Link to={ previousPage } >Previous</Link>
-				}
-				<span> Page { currentPage }</span>
-				<Link to={ nextPage }>Next</Link>
+			<div className={ classes.tableNav }>
+				{ previousPageLink }
+				<div className={ classes.pageNumber }> Page { currentPage } of 500</div>
+				{ nextPageLink }
 			</div>
-			<Suspense fallback={ <Spinner /> }>
-				<Await
-					resolve={ people }
-					errorElement={ <div>Could not load people.</div> }
-					children={ fetchedPeople =>
-						<PeopleList people={ fetchedPeople } />
-					}
-				/>
-			</Suspense>
+			<div className={ classes.table }>
+				<div className={ classes.tableHeader }>
+					<span>Name</span>
+					<span>Known For</span>
+					<span>Occupation</span>
+				</div>
+				<Suspense fallback={ <Spinner /> }>
+					<Await
+						resolve={ people }
+						children={ fetchedPeople =>
+							<PeopleList people={ fetchedPeople } />
+						}
+					/>
+				</Suspense>
+			</div>
 		</>
 	)
 }

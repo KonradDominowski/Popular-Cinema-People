@@ -14,14 +14,6 @@
   object-fit: contain;
 }
 
-.row img:before {
-  content: "";
-  display: block;
-  height: 100px;
-  width: 100px;
-  background: black;
-}
-
 .row > div {
   display: flex;
   flex-direction: column;
@@ -48,4 +40,11 @@
   font-weight: normal;
   font-size: 0.7rem;
   color: rgba(48, 48, 48, 0.808);
+}
+
+@media (width < 480px) {
+  .row img {
+    height: 70px;
+    max-height: 70px;
+  }
 }
