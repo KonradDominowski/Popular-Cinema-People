@@ -10,8 +10,8 @@ import { useState } from 'react';
 const router = createBrowserRouter([
   {
     path: '/',
-    errorElement: <ErrorElement />,
     element: <RootLayout />,
+    errorElement: <ErrorElement />,
     children: [
       { index: true, loader: () => redirect('people') },
       {

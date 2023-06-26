@@ -1,7 +1,23 @@
+import { Link } from "react-router-dom";
 import { useRouteError } from "react-router-dom";
 
-export default function ErrorElement(params) {
+export default function ErrorElement() {
 	const error = useRouteError()
-	console.log(error.data)
-	return <h1>{ error.data.message }</h1>
+	console.log(error)
+	let message = ''
+
+	if (error?.status === 404) {
+		message = 'Error 404, page not found.'
+	} else {
+		message = error.message
+	}
+
+	return <>
+		<h1>Error</h1>
+		<p>{ message }</p>
+
+		<p>
+			<Link to='/'>Go back</Link>
+		</p>
+	</>
 }

@@ -4,8 +4,15 @@ import { Await, defer, json, useLoaderData, useParams } from 'react-router-dom';
 import PeopleList from '../components/PeopleTable/PeopleList';
 import Spinner from './../components/UI/Spinner'
 import { Link } from 'react-router-dom';
+import ErrorElement from './ErrorElement';
 
 async function loadPeople(pageNumber) {
+	if (pageNumber < 1 || pageNumber > 500) {
+		return json({
+			message: 'Page number has to be between 1 and 500'
+		}, { status: 422 })
+	}
+
 	const options = {
 		method: 'GET',
 		headers: {
@@ -16,11 +23,13 @@ async function loadPeople(pageNumber) {
 
 	const res = await fetch(`https://api.themoviedb.org/3/person/popular?language=en-US&page=${pageNumber}`, options)
 
-	if (!res.ok) throw json({
-		message: 'Could not fetch people data'
-	})
+	if (!res.ok) {
+		console.log('json is returned')
+		return json({ message: 'Could not fetch data' }, { status: 422 })
+	}
 
 	const data = await res.json()
+
 	return data.results
 }
 
@@ -44,14 +53,20 @@ export default function People() {
 	return (
 		<>
 			<div>
-				<Link to={ previousPage }>Previous</Link>
+				{
+					currentPage > 1 && <Link to={ previousPage } >Previous</Link>
+				}
 				<span> Page { currentPage }</span>
 				<Link to={ nextPage }>Next</Link>
 			</div>
 			<Suspense fallback={ <Spinner /> }>
-				<Await resolve={ people }>
-					{ fetchedPeople => <PeopleList people={ fetchedPeople } /> }
-				</Await>
+				<Await
+					resolve={ people }
+					errorElement={ <div>Could not load people.</div> }
+					children={ fetchedPeople =>
+						<PeopleList people={ fetchedPeople } />
+					}
+				/>
 			</Suspense>
 		</>
 	)
